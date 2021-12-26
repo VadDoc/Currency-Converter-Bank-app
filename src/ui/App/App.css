@@ -1,0 +1,22 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #4b4b4b;
+    height: 100vh;
+    background-image: url(https://img5.goodfon.ru/original/1280x800/c/dc/kirpich-kirpichnaia-stena-fon-fotofon-tekstura.jpg);
+}
+
+.active {
+    color: darkgreen!important;
+}
+
+.error-message {
+    width: 500px;
+    border: solid 3px red;
+    border-radius: 10px;
+    padding: 50px;
+    font-size: 20px;
+    background-color: white;
+}

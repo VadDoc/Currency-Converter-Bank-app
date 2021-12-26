@@ -1,0 +1,36 @@
+.default,
+.red {
+    padding: 5px 10px;
+    border: 3px solid darkgreen;
+    border-radius: 5px;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    background-color: darkgreen;
+    color: antiquewhite;
+    cursor: pointer;
+    width: 100%;
+    transition: .4s ease;
+    height: 56px;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.default:hover,
+.red:hover {
+    transform: scale(1.05);
+}
+
+.default:disabled {
+    background-color: #f6efc3;
+    border: 3px solid #5b885b;
+    color: grey;
+}
+
+.default:disabled:hover {
+    transform: none;
+}
