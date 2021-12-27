@@ -1,6 +1,6 @@
 .transactionDetails {
   position: relative;
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
 
   > div:first-child {
@@ -13,11 +13,12 @@
   .forSend {
     font-size: 20px;
     margin-top: 10px;
+    margin-bottom: 20px;
     font-weight: bold;
   }
 
   p {
-    margin: 2px 0;
+    margin: 10px 0;
     line-height: 20px;
 
     span {

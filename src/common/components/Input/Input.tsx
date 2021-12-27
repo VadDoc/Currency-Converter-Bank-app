@@ -1,5 +1,5 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from 'react'
-import styles from './Input.module.css'
+import styles from './Input.module.scss'
 
 const Input: React.FC<PropsType> = (
   {

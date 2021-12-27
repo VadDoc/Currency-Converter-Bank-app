@@ -17,6 +17,7 @@ import {v1} from "uuid";
 import {addTransaction, TransactionDataType} from "../../../bll/transactionsReducer";
 import {currentDate, currentTime} from "../../../common/utilites/currentTime";
 import {toDisableButton} from "../../../common/utilites/helper";
+
 export const Converter = () => {
   const currencyExchangeRates = useSelector<AppStoreType, CurrencyExchangeRatesType>(state => state.converterReducer.data)
   const baseCurrency = useSelector<AppStoreType, string>(state => state.converterReducer.query.base_currency)
@@ -84,7 +85,7 @@ export const Converter = () => {
   }
 
   useEffect(() => {
-    dispatch(getCurrencyApi('USD'))
+    // dispatch(getCurrencyApi('USD'))
   }, []);
 
   return (

@@ -1,10 +1,19 @@
-const initialState: InitialStateType = {
+import {getFromLocalStorage} from "../common/utilites/localStorage";
+
+const transactionsFromLS: Array<TransactionDataType> = getFromLocalStorage<Array<TransactionDataType>>('bankTransactions', [])
+const pageSize = 10
+
+const initialState: TransactionsInitialStateType = {
   transactions: [],
   transactionDetails: null,
-  bankAccountValue: ''
+  bankAccountValue: '',
+  pageSize: pageSize,
+  currentPage: 1,
+  portionSize: 5,
+  pagesTransactions: transactionsFromLS.slice(0, pageSize)
 }
 
-export const transactionsReducer = (state = initialState, action: ActionsType): InitialStateType => {
+export const transactionsReducer = (state = initialState, action: ActionsType): TransactionsInitialStateType => {
   switch (action.type) {
     case "TRANSACTIONS/SET_TRANSACTIONS_FROM_LOCAL_STORAGE":
       return {...state, transactions: action.data}
@@ -17,18 +26,14 @@ export const transactionsReducer = (state = initialState, action: ActionsType): 
     case "TRANSACTIONS/SEND_MONEY":
       return {
         ...state, transactions: state.transactions.map(tr => tr.id === action.data.id ?
-          {
-            ...tr, sendMoney: {
-              ...tr.sendMoney,
-              isSentMoney: action.data.sendMoney.isSentMoney,
-              sentToBankAccount: action.data.sendMoney.sentToBankAccount,
-              date: action.data.sendMoney.date,
-              time: action.data.sendMoney.time
-            }
-          } : tr)
+          {...tr, sendMoney: {...action.data.sendMoney}} : tr)
       }
     case "TRANSACTIONS/CHANGE_BANK_ACCOUNT":
       return {...state, bankAccountValue: action.value}
+    case "TRANSACTIONS/SET_CURRENT_PAGE":
+      return {...state, currentPage: action.pageNumber}
+    case "TRANSACTIONS/SET_PAGE_TRANSACTIONS":
+      return {...state, pagesTransactions: state.transactions.slice(pageSize * (action.page - 1), pageSize * action.page)}
     default:
       return state;
   }
@@ -46,6 +51,10 @@ export const sendMoney = (data: TransactionDataType) =>
   ({type: 'TRANSACTIONS/SEND_MONEY', data} as const)
 export const changeBankAccount = (value: string) =>
   ({type: 'TRANSACTIONS/CHANGE_BANK_ACCOUNT', value} as const)
+export const setPagesTransactions = (page: number) =>
+  ({type: 'TRANSACTIONS/SET_PAGE_TRANSACTIONS', page} as const)
+export const setCurrentPage = (pageNumber: number) =>
+  ({type: 'TRANSACTIONS/SET_CURRENT_PAGE', pageNumber} as const)
 
 type ActionsType = ReturnType<typeof addTransaction>
   | ReturnType<typeof deleteTransaction>
@@ -53,10 +62,17 @@ type ActionsType = ReturnType<typeof addTransaction>
   | ReturnType<typeof setTransactionDetails>
   | ReturnType<typeof sendMoney>
   | ReturnType<typeof changeBankAccount>
-type InitialStateType = {
+| ReturnType<typeof setPagesTransactions>
+  | ReturnType<typeof setCurrentPage>
+
+export type TransactionsInitialStateType = {
   transactions: Array<TransactionDataType>
   transactionDetails: TransactionDataType | null
   bankAccountValue: string
+  pageSize: number
+  currentPage: number
+  portionSize: number
+  pagesTransactions: Array<TransactionDataType>
 }
 export type TransactionDataType = {
   id: string

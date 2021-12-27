@@ -4,9 +4,9 @@ import Button from "../../../../../common/components/Button/Button";
 import React, {ChangeEvent, useState} from "react";
 import {
   changeBankAccount,
-  sendMoney,
+  sendMoney, setPagesTransactions,
   setTransactionDetails,
-  TransactionDataType
+  TransactionDataType, TransactionsInitialStateType
 } from "../../../../../bll/transactionsReducer";
 import {currentDate, currentTime} from "../../../../../common/utilites/currentTime";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,8 +14,12 @@ import {AppStoreType} from "../../../../../bll/store";
 import {saveToLocalStorage} from "../../../../../common/utilites/localStorage";
 
 export const SendMoneyTools = ({transaction}: PropsType) => {
-  const transactions = useSelector<AppStoreType, Array<TransactionDataType>>(state => state.transactionsReducer.transactions)
-  const bankAccountValue = useSelector<AppStoreType, string>(state => state.transactionsReducer.bankAccountValue)
+  const {
+    transactions,
+    bankAccountValue,
+    currentPage
+  } = useSelector<AppStoreType, TransactionsInitialStateType>(state => state.transactionsReducer)
+
   const dispatch = useDispatch()
 
   const [error, setError] = useState(false);
@@ -26,7 +30,7 @@ export const SendMoneyTools = ({transaction}: PropsType) => {
   }
 
   const sendMoneyToBankAccount = () => {
-    if (/^[a-z0-9]{3}$/i.test(bankAccountValue)) {
+    if (/^[a-z0-9]{10}$/i.test(bankAccountValue)) {
       const sentMoneyTransaction = {
         ...transaction, sendMoney: {
           ...transaction.sendMoney,
@@ -39,6 +43,7 @@ export const SendMoneyTools = ({transaction}: PropsType) => {
       dispatch(sendMoney(sentMoneyTransaction))
       dispatch(changeBankAccount(''))
       dispatch(setTransactionDetails(null))
+      dispatch(setPagesTransactions(currentPage))
     } else {
       setError(true)
     }
