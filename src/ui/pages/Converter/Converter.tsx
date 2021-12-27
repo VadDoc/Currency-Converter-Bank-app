@@ -85,7 +85,7 @@ export const Converter = () => {
   }
 
   useEffect(() => {
-    // dispatch(getCurrencyApi('USD'))
+    dispatch(getCurrencyApi('USD'))
   }, []);
 
   return (
