@@ -1,6 +1,3 @@
-import {getFromLocalStorage} from "../common/utilites/localStorage";
-
-const transactionsFromLS: Array<TransactionDataType> = getFromLocalStorage<Array<TransactionDataType>>('bankTransactions', [])
 const pageSize = 10
 
 const initialState: TransactionsInitialStateType = {
@@ -10,7 +7,7 @@ const initialState: TransactionsInitialStateType = {
   pageSize: pageSize,
   currentPage: 1,
   portionSize: 5,
-  pagesTransactions: transactionsFromLS.slice(0, pageSize)
+  pagesTransactions: []
 }
 
 export const transactionsReducer = (state = initialState, action: ActionsType): TransactionsInitialStateType => {

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect} from "react";
+import React, {ChangeEvent} from "react";
 import styles from './Converter.module.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -85,9 +85,6 @@ export const Converter = () => {
     toDisableButton(dispatch)
   }
 
-  useEffect(() => {
-    dispatch(getCurrencyApi('USD'))
-  }, []);
 
   return (
     <div className={styles.converter}>
