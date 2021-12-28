@@ -90,6 +90,7 @@ export const Converter = () => {
     <div className={styles.converter}>
       <h1>Currency Converter</h1>
       <div>
+        <h4>Select currency to exchange from:</h4>
         <Input
           type={'number'}
           value={inputChangeFromValue}
@@ -101,7 +102,9 @@ export const Converter = () => {
           onChange={onChangeSelectCurrencyFrom}
         />
       </div>
+
       <div>
+        <h4>Select currency to exchange to:</h4>
         <Input
           type={'number'}
           value={inputChangeToValue}
