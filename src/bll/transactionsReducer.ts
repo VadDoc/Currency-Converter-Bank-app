@@ -1,10 +1,8 @@
-const pageSize = 10
-
 const initialState: TransactionsInitialStateType = {
   transactions: [],
   transactionDetails: null,
   bankAccountValue: '',
-  pageSize: pageSize,
+  pageSize: 10,
   currentPage: 1,
   portionSize: 5,
   pagesTransactions: []
@@ -30,7 +28,7 @@ export const transactionsReducer = (state = initialState, action: ActionsType): 
     case "TRANSACTIONS/SET_CURRENT_PAGE":
       return {...state, currentPage: action.pageNumber}
     case "TRANSACTIONS/SET_PAGE_TRANSACTIONS":
-      return {...state, pagesTransactions: state.transactions.slice(pageSize * (action.page - 1), pageSize * action.page)}
+      return {...state, pagesTransactions: state.transactions.slice(state.pageSize * (action.page - 1), state.pageSize * action.page)}
     default:
       return state;
   }
