@@ -14,7 +14,7 @@ import Select from "../../../common/components/Select/Select";
 import {saveToLocalStorage} from "../../../common/utilites/localStorage";
 import Button from "../../../common/components/Button/Button";
 import {v1} from "uuid";
-import {addTransaction, TransactionDataType} from "../../../bll/transactionsReducer";
+import {addTransaction, setPagesTransactions, TransactionDataType} from "../../../bll/transactionsReducer";
 import {currentDate, currentTime} from "../../../common/utilites/currentTime";
 import {toDisableButton} from "../../../common/utilites/helper";
 
@@ -81,6 +81,7 @@ export const Converter = () => {
     }
     saveToLocalStorage<Array<TransactionDataType>>('bankTransactions', [transaction, ...transactions])
     dispatch(addTransaction(transaction))
+    dispatch(setPagesTransactions(1))
     toDisableButton(dispatch)
   }
 

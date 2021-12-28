@@ -24,6 +24,9 @@ export const Transactions = () => {
 
   const dispatch = useDispatch()
 
+  console.log('transactions', transactions)
+  console.log('pagesTransactions', pagesTransactions)
+
   useEffect(() => {
     const transactionsFromLS: Array<TransactionDataType> = getFromLocalStorage<Array<TransactionDataType>>('bankTransactions', [])
     transactionsFromLS && dispatch(setTransactionsFromLS(transactionsFromLS))
