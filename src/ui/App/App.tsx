@@ -16,7 +16,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getCurrencyApi('USD'))
+    // dispatch(getCurrencyApi('USD'))
     const transactionsFromLS: Array<TransactionDataType> = getFromLocalStorage<Array<TransactionDataType>>('bankTransactions', [])
     transactionsFromLS && dispatch(setTransactionsFromLS(transactionsFromLS))
     dispatch(setPagesTransactions(1))
@@ -30,6 +30,8 @@ function App() {
           <Routes>
             <Route path={'/'} element={<Converter/>}/>
             <Route path={'converter'} element={<Converter/>}/>
+            <Route path={'/Currency-Converter-Bank-app'} element={<Converter/>}/>
+
             <Route path={'transactions'} element={<Transactions/>}/>
           </Routes>
           <Navigation/>
