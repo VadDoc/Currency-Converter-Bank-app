@@ -1,5 +1,6 @@
 {
   "name": "bank-app",
+  "homepage": "https://currency-converter-bank-app.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
